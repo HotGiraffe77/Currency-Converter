@@ -3,7 +3,7 @@ import tkinter as tk
 
 EXCHANGE_RATE = 0.005
 
-def convert():
+def convertJPY():
     try:
         yen = float(entry_yen.get())
         gbp = yen * EXCHANGE_RATE
@@ -11,16 +11,29 @@ def convert():
     except ValueError:
         label_result.config(text="Invalid Input...")
 
+def convertGBP():
+    try:
+        gbp = float(entry_yen.get())
+        yen = gbp / EXCHANGE_RATE
+        label_result.config(text=f"{yen:,.2f} JPY")
+    except ValueError:
+        label_result.config(text="Invalid Input...")
+
+
 
 root = tk.Tk()
 root.title("Currency Converter")
 root.geometry("900x600")
 
-tk.Label(root, text="JPY --> GBP").pack(pady=50)
+tk.Label(root, text="GBP/JPY Converter").pack(pady=50)
 entry_yen = tk.Entry(root)
 entry_yen.pack()
 
-tk.Button(root, text="Convert to GBP", command=convert).pack(pady=100)
+tk.Button(root, text="GBP -> JPY", command=convertGBP).pack(side="top", pady = (50, 10))
+
+tk.Button(root, text="JPY -> GBP", command=convertJPY).pack(side="top", pady=(10, 50))
+
+
 
 label_result = tk.Label(root, text="Result will appear here...")
 label_result.pack()
